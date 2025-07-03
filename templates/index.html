@@ -33,6 +33,7 @@
       try {
         const res = await fetch('/events');
         const data = await res.json();
+        data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
         const container = document.getElementById('events');
         container.innerHTML = '';
@@ -52,7 +53,7 @@
           const div = document.createElement('div');
           div.className = 'event';
           div.innerText = text;
-          container.appendChild(div);
+          container.prepend(div);
         });
 
       } catch (err) {
